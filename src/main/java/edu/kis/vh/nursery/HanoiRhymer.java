@@ -1,17 +1,29 @@
 package edu.kis.vh.nursery;
 
-public class HanoiRhymer extends defaultCountingOutRhymer {
+// Użycie skrótów alt + ← oraz alt + →, przełącza w środowisku IntelliJ otworzone karty plików
 
-int totalRejected = 0;
+public class HanoiRhymer extends DefaultCountingOutRhymer {
 
-	public int reportRejected() {
-		return totalRejected;
-	}
+    private int totalRejected = 0;
 
-	public void countIn(int in) {
-	if (!callCheck() && in > peekaboo())
-			totalRejected++;
-			else
-				super.countIn(in);
-	}
+    public int getTotalRejected() {
+        return totalRejected;
+    }
+
+    public void setTotalRejected(int totalRejected) {
+        this.totalRejected = totalRejected;
+    }
+
+    public int reportRejected() {
+        return getTotalRejected();
+    }
+
+    @Override
+    public void countIn(int in) {
+        if (!callCheck() && in > peekBoo())
+            setTotalRejected(getTotalRejected() + 1);
+        else
+            super.countIn(in);
+    }
+
 }
